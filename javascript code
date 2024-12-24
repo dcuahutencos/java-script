@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Basic styles for demonstration */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px 20px;
+            color: white;
+        }
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+        .gallery img {
+            width: 100px;
+            height: auto;
+            cursor: pointer;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal img {
+            width: 80%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Portfolio</h1>
+        <div class="hamburger-menu" onclick="toggleMenu()">☰</div>
+        <nav class="nav-links">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>This is my personal portfolio showcasing my work and skills.</p>
+        <p>Today's Date: <span id="date"></span></p>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="gallery">
+            <img src="thumb1.jpg" alt="Thumbnail 1" onclick="showModal('img1.jpg')">
+            <img src="thumb2.jpg" alt="Thumbnail 2" onclick="showModal('img2.jpg')">
+        </div>
+        <div class="modal" id="imageModal" onclick="hideModal()">
+            <img id="modalImage" src="" alt="">
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <form>
+            <p><input type="button" name="random" value="Random Link" onclick="randomLink()"></p>
+        </form>
+    </section>
+
+    <script>
+        // Display current date
+        document.getElementById('date').textContent = new Date().toDateString();
+
+        // Hamburger menu toggle
+        function toggleMenu() {
+            const nav = document.querySelector('.nav-links');
+            if (nav.style.display === 'flex') {
+                nav.style.display = 'none';
+            } else {
+                nav.style.display = 'flex';
+                nav.style.flexDirection = 'column';
+            }
+        }
+
+        // Modal functionality
+        function showModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            modal.style.display = 'flex';
+            modalImage.src = imageSrc;
+        }
+
+        function hideModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+        }
+
+        // Random link opener
+        const randomLinks = [
+            'https://example.com/1',
+            'https://example.com/2',
+            'https://example.com/3'
+        ];
+
+        function randomLink() {
+            const randomIndex = Math.floor(Math.random() * randomLinks.length);
+            window.open(randomLinks[randomIndex], '_blank');
+        }
+    </script>
+</body>
+</html>
